@@ -13,7 +13,7 @@ model = load_model('next_word_lstm.h5')
 
 ##Load the tokenizer
 
-with open('tokenizer.pkl','rb') as handle:
+with open('token.pkl','rb') as handle:
     token = pickle.load(handle)
 
 
