@@ -3,8 +3,8 @@ import numpy as np
 import pickle
 import tensorflow as tf
 import keras
-from keras.model import load_model
-from keras.preprocessing.sequences import pad_sequences
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 
 ##Loading the LSTM model
@@ -13,7 +13,7 @@ model = load_model('next_word_lstm.h5')
 
 ##Load the tokenizer
 
-with open('token.pkl','rb') as handle:
+with open('tokenizer.pickle','rb') as handle:
     token = pickle.load(handle)
 
 
