@@ -54,4 +54,4 @@ if st.button('Predict Next Word'):
         st.warning("❌ Couldn't predict a next word. Please try a simpler or different phrase.")
         st.text(f"Error info: {next_word}")  # optional for debugging
     else:
-        st.success(
+        st.success(f"✅ Predicted Next Word: **{next_word}**")
