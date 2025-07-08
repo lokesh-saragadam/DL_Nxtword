@@ -34,7 +34,7 @@ inp_text = st.text_input("Enter a sequence of words:", "To be or not to be")
 
 # Predict button
 if st.button('Predict Next Word'):
-    max_seq_len = model.input_shape[1] + 1
+    max_seq_len = 14
     next_word = predict_next_word(model, token, inp_text, max_seq_len)
 
     if next_word is None or next_word.startswith("[⚠️"):
