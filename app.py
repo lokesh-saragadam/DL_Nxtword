@@ -5,23 +5,19 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 st.write("✅ App started")
+@st.cache_resource
+def load_lstm_model():
+    return load_model("next_word_lstm.h5")
 
-try:
-    st.write("🔄 Loading model...")
-    model = load_model("next_word_lstm (3).h5")
-    st.write("✅ Model loaded")
-except Exception as e:
-    st.error(f"❌ Model load failed: {e}")
+@st.cache_resource
+def load_tokenizer():
+    with open("tokenizer.pickle", "rb") as f:
+        return pickle.load(f)
 
-try:
-    st.write("🔄 Loading tokenizer...")
-    with open("tokenizer (3).pickle", "rb") as f:
-        tokenizer = pickle.load(f)
-    st.write("✅ Tokenizer loaded")
-except Exception as e:
-    st.error(f"❌ Tokenizer load failed: {e}")
+# Load once and reuse
+model = load_lstm_model()
+tokenizer = load_tokenizer()
 
-# Function to predict the next word
 
 def predict_next_word(model, tokenizer, text, max_sequence_length):
     # Convert input text to token list
