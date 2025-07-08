@@ -4,12 +4,22 @@ import pickle
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-#Load the LSTM Model
-model=load_model('next_word_lstm (3).h5')
+st.write("✅ App started")
 
-#Load the tokenizer
-with open('tokenizer (3).pickle','rb') as handle:
-    tokenizer=pickle.load(handle)
+try:
+    st.write("🔄 Loading model...")
+    model = load_model("next_word_lstm (3).h5")
+    st.write("✅ Model loaded")
+except Exception as e:
+    st.error(f"❌ Model load failed: {e}")
+
+try:
+    st.write("🔄 Loading tokenizer...")
+    with open("tokenizer (3).pickle", "rb") as f:
+        tokenizer = pickle.load(f)
+    st.write("✅ Tokenizer loaded")
+except Exception as e:
+    st.error(f"❌ Tokenizer load failed: {e}")
 
 # Function to predict the next word
 
@@ -41,7 +51,12 @@ st.title("Next Word Prediction With LSTM And Early Stopping")
 input_text=st.text_input("Enter the sequence of Words")
 if st.button("Predict Next Word"):
     max_sequence_len = model.input_shape[1] # Retrieve the max sequence length from the model input shape
-    next_word = predict_next_word(model, tokenizer, input_text, max_sequence_len)
-    st.markdown(f"**Next Word:** `{next_word}`")
+    try:
+        st.write("🔮 Predicting...")
+        next_word = predict_next_word(model, tokenizer, input_text, max_seq_len)
+        st.write(f"Next word: {next_word}")
+    except Exception as e:
+        st.error(f"❌ Prediction failed: {e}")
+
 
 
