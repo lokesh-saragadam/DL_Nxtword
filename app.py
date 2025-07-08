@@ -33,7 +33,7 @@ def predict_next_word(model, tokenizer, text, max_sequence_length):
         if index == predicted_word_index:
             return word
 
-    return None  # In case the word wasn't found
+    return "not-found"  # In case the word wasn't found
 
 
 # streamlit app
